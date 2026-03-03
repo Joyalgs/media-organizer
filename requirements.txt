@@ -1,0 +1,3 @@
+Pillow
+hachoir
+pillow-heif

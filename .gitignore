@@ -1,0 +1,28 @@
+# Logs
+*.log
+
+# ExifTool
+exiftool.exe
+exiftool_files/
+
+# Python caching
+__pycache__/
+*.pyc
+
+# Local settings
+.vscode/
+.idea/
+
+# Large media files (if any in root)
+*.jpg
+*.jpeg
+*.png
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.3gp
+*.heic
+*.tiff
+*.webp
