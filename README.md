@@ -11,11 +11,11 @@ Tired of messy folders with filenames like `IMG_4821.JPG`? This script extracts 
 - **Recursive Scanning:** Automatically crawls through nested subdirectories in your source folder.
 - **Smart Date Extraction:** Follows a strict priority system to find the most accurate date:
   - **Priority 1: EXIF Metadata** (Date Taken from `DateTimeOriginal` or `DateTimeDigitized` for photos; creation date for videos).
-  - **Priority 2: Upload Date** (Uses the file's system creation time).
-  - **Priority 3: File Modification Date** (System `mtime`).
+  - **Priority 2: File Modification Date** (System `mtime`).
+  - **Priority 3: File Creation Date** (System `ctime`).
 - **HEIF/HEIC Support:** Includes full support for modern iPhone photo formats.
 - **Smart Renaming:** Renames files to `YYYYMMDDHHMMSS_Seq.ext` for chronological sorting.
-- **Organized Structure:** Automatically sorts files into `Year/Month/` subdirectories.
+- **Organized Structure:** Automatically sorts files into `Year/Month/Day` subdirectories (e.g., `2025/10/sun, Oct 5, 2025/`).
 - **Duplicate Prevention:** Checks for existing files in the destination before moving.
 - **Duplicate Identification:** Includes a utility to find identical files across subdirectories, even if they have different names.
 - **Bulk Metadata Updater:** Includes a utility to fix incorrect or missing metadata using local `date.txt` files.
@@ -60,10 +60,12 @@ OldCamera/
 OrganizedPhotos/
 ├── 2021/
 │   └── 05/
-│       └── 20210512143005_01.jpg
+│       └── wed, May 12, 2021/
+│           └── 20210512143005_01.jpg
 ├── 2022/
 │   └── 01/
-│       └── 20220105091500_01.mp4
+│       └── wed, Jan 05, 2022/
+│           └── 20220105091500_01.mp4
 └── review/
     └── corrupted_image.jpg  (If metadata could not be read)
 ```

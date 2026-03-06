@@ -2,7 +2,7 @@
 description: Organize photos and videos by metadata timestamp
 ---
 
-This script recursively scans a source directory, extracts metadata from photos (EXIF) and videos (QuickTime/MP4/etc.), and moves them to a target directory organized by year and month, renaming them to `YYYYMMDDHHMMSS_Seq.ext`.
+This script recursively scans a source directory, extracts metadata from photos (EXIF) and videos (QuickTime/MP4/etc.), and moves them to a target directory organized by year, month, and day (e.g., `2025/10/sun, Oct 5, 2025/`), renaming them to `YYYYMMDDHHMMSS_Seq.ext`.
 
 ### Prerequisite: Install dependencies
 ```bash

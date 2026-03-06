@@ -88,8 +88,8 @@ def get_timestamp(file_path):
     """
     Attempts to get timestamp based on priorities:
     1. EXIF Metadata (Date Taken)
-    2. Upload Date (interpreted as File Creation Time)
-    3. File Modification Date
+    2. File Modification Date
+    3. File Creation Date
     """
     suffix = file_path.suffix.lower()
     
@@ -104,22 +104,21 @@ def get_timestamp(file_path):
         logging.debug(f"Using Priority 1 (Metadata) for {file_path}")
         return metadata_ts
 
-    # Priority 2: Upload Date (File Creation Time)
-    # On Windows, st_ctime is the creation time.
-    try:
-        stat = file_path.stat()
-        creation_time = datetime.datetime.fromtimestamp(stat.st_ctime)
-        logging.info(f"Metadata missing for {file_path}. Using Priority 2 (Upload Date/Creation Time): {creation_time}")
-        return creation_time
-    except Exception as e:
-        logging.debug(f"Could not get creation time for {file_path}: {e}")
-
-    # Priority 3: File Modification Date
+    # Priority 2: File Modification Date
     try:
         stat = file_path.stat()
         mod_time = datetime.datetime.fromtimestamp(stat.st_mtime)
-        logging.info(f"Metadata and Creation time missing for {file_path}. Using Priority 3 (Modification Time): {mod_time}")
+        logging.info(f"Metadata missing for {file_path}. Using Priority 2 (Modification Time): {mod_time}")
         return mod_time
+    except Exception as e:
+        logging.debug(f"Could not get modification time for {file_path}: {e}")
+
+    # Priority 3: File Creation Date
+    try:
+        stat = file_path.stat()
+        creation_time = datetime.datetime.fromtimestamp(stat.st_ctime)
+        logging.info(f"Metadata and Modification time missing for {file_path}. Using Priority 3 (Creation Time): {creation_time}")
+        return creation_time
     except Exception as e:
         logging.error(f"Could not determine any date for {file_path}: {e}")
         return None
@@ -152,10 +151,11 @@ def organize_files(source_dir, target_dir):
                 raise ValueError("No valid date metadata or file timestamps found.")
             year = timestamp.strftime('%Y')
             month = timestamp.strftime('%m')
+            date_folder = f"{timestamp.strftime('%a').lower()}, {timestamp.strftime('%b')} {timestamp.day}, {timestamp.year}"
             timestamp_str = timestamp.strftime('%Y%m%d%H%M%S')
             
-            # Create year/month directory
-            dest_dir = target_path / year / month
+            # Create year/month/date directory
+            dest_dir = target_path / year / month / date_folder
             dest_dir.mkdir(parents=True, exist_ok=True)
             
             # Handle sequence numbering
