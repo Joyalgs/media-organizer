@@ -129,5 +129,11 @@ python summarize_log.py
 ## 📝 Logging
 All operations are logged to `photo_organizer.log`. This file tracks every file moved, its original path, and any errors encountered during processing.
 
+## ☕ Support
+
+If you find this tool helpful, consider supporting the project!
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/joyalg)
+
 ---
 *Created with ❤️ to keep your memories organized.*
